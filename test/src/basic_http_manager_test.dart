@@ -10,13 +10,16 @@ void main() {
   group('Basic Restful Api Test', () {
     final basicHttpManager = BasicHttpManager(
       managerConfig: HttpManagerConfig(
-          baseUrl: 'https://api.askpic.com/', interceptors: []),
+        baseUrl: 'https://www.baidu.com/',
+        interceptors: [],
+      ),
     );
 
     test('Get', () async {
-      final resp = await basicHttpManager.get('/conversations');
+      final resp = await basicHttpManager.get('');
       debugPrint(
-          '${'=' * 10}\n${resp}\n ${jsonEncode(resp?.data)}\n ${'=' * 10}');
+        '${'=' * 10}\n$resp\n ${jsonEncode(resp?.data)}\n ${'=' * 10}',
+      );
       expect(
         resp?.data,
         true,

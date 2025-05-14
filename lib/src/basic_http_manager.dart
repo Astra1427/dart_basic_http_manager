@@ -15,12 +15,7 @@ class BasicHttpManager {
       //     connectTimeout: REQUEST_TIMEOUT_DEFAULT,
       //     receiveTimeout: REQUEST_TIMEOUT_DEFAULT));
       _dio = Dio();
-      _dio?.options.baseUrl = managerConfig.baseUrl;
-      _dio?.options.connectTimeout = requestTimeout;
-      _dio?.options.receiveTimeout = requestTimeout;
-      _dio?.options.sendTimeout = requestTimeout;
-
-      _dio?.interceptors.addAll(managerConfig.interceptors);
+      setConfig(managerConfig);
     }
   }
 
@@ -28,11 +23,26 @@ class BasicHttpManager {
 
   Dio? _dio;
 
+  /// dio
   Dio get dio => _dio!;
 
+  /// 请求超时时间
   static const requestTimeout = Duration(seconds: 40);
 
-  final HttpManagerConfig managerConfig;
+  /// 配置
+  HttpManagerConfig managerConfig;
+
+  /// 设置配置
+  void setConfig(HttpManagerConfig config) {
+    managerConfig = config;
+    _dio?.options.baseUrl = managerConfig.baseUrl;
+    _dio?.options.connectTimeout = requestTimeout;
+    _dio?.options.receiveTimeout = requestTimeout;
+    _dio?.options.sendTimeout = requestTimeout;
+
+    _dio?.interceptors.clear();
+    _dio?.interceptors.addAll(managerConfig.interceptors);
+  }
 
   ///
   /// 通用的GET请求
