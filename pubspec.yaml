@@ -1,6 +1,6 @@
 name: basic_http_manager
 description: 基础的http请求管理
-version: 0.1.0+1
+version: 0.1.1+2
 publish_to: none
 
 environment:
