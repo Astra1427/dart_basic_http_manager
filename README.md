@@ -1,67 +1,64 @@
 # Basic Http Manager
 
-[![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
-[![Powered by Mason](https://img.shields.io/endpoint?url=https%3A%2F%2Ftinyurl.com%2Fmason-badge)](https://github.com/felangel/mason)
-[![License: MIT][license_badge]][license_link]
 
-A Very Good Project created by Very Good CLI.
+基于Flutter和Dio的HTTP请求管理器，简化API调用和网络请求。
 
-## Installation 💻
+## 安装 💻
 
-**❗ In order to start using Basic Http Manager you must have the [Flutter SDK][flutter_install_link] installed on your machine.**
+**❗ 使用Basic Http Manager前，需要先安装[Flutter SDK][flutter_install_link]。**
 
-Install via `flutter pub add`:
+通过`flutter pub add`安装:
 
 ```sh
 dart pub add basic_http_manager
 ```
 
----
+## 功能特点 ✨
 
-## Continuous Integration 🤖
+- 简单易用的HTTP请求接口(GET, POST, PUT, DELETE)
+- 可配置的拦截器
+- 灵活的请求头管理
+- 业务错误码处理
+- 超时控制
 
-Basic Http Manager comes with a built-in [GitHub Actions workflow][github_actions_link] powered by [Very Good Workflows][very_good_workflows_link] but you can also add your preferred CI/CD solution.
+## 使用示例 📝
 
-Out of the box, on each pull request and push, the CI `formats`, `lints`, and `tests` the code. This ensures the code remains consistent and behaves correctly as you add functionality or make changes. The project uses [Very Good Analysis][very_good_analysis_link] for a strict set of analysis options used by our team. Code coverage is enforced using the [Very Good Workflows][very_good_coverage_link].
+```dart
+// 初始化HTTP管理器
+final httpManager = BasicHttpManager(
+  managerConfig: HttpManagerConfig(
+    baseUrl: 'https://api.example.com',
+    interceptors: [LogInterceptor()],
+    httpHeaderGetter: () => {'Authorization': 'Bearer token'},
+  ),
+);
 
----
+// 发送GET请求
+final response = await httpManager.get('/users');
 
-## Running Tests 🧪
-
-For first time users, install the [very_good_cli][very_good_cli_link]:
-
-```sh
-dart pub global activate very_good_cli
+// 发送POST请求
+final response = await httpManager.post(
+  '/users',
+  params: {'name': 'John', 'age': 30},
+);
 ```
 
-To run all unit tests:
+## 运行测试 🧪
+
+运行所有单元测试:
 
 ```sh
 very_good test --coverage
 ```
 
-To view the generated coverage report you can use [lcov](https://github.com/linux-test-project/lcov).
+查看生成的覆盖率报告:
 
 ```sh
-# Generate Coverage Report
+# 生成覆盖率报告
 genhtml coverage/lcov.info -o coverage/
 
-# Open Coverage Report
+# 打开覆盖率报告
 open coverage/index.html
 ```
 
 [flutter_install_link]: https://docs.flutter.dev/get-started/install
-[github_actions_link]: https://docs.github.com/en/actions/learn-github-actions
-[license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
-[license_link]: https://opensource.org/licenses/MIT
-[logo_black]: https://raw.githubusercontent.com/VGVentures/very_good_brand/main/styles/README/vgv_logo_black.png#gh-light-mode-only
-[logo_white]: https://raw.githubusercontent.com/VGVentures/very_good_brand/main/styles/README/vgv_logo_white.png#gh-dark-mode-only
-[mason_link]: https://github.com/felangel/mason
-[very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
-[very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
-[very_good_cli_link]: https://pub.dev/packages/very_good_cli
-[very_good_coverage_link]: https://github.com/marketplace/actions/very-good-coverage
-[very_good_ventures_link]: https://verygood.ventures
-[very_good_ventures_link_light]: https://verygood.ventures#gh-light-mode-only
-[very_good_ventures_link_dark]: https://verygood.ventures#gh-dark-mode-only
-[very_good_workflows_link]: https://github.com/VeryGoodOpenSource/very_good_workflows
