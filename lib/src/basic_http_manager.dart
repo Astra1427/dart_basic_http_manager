@@ -44,6 +44,11 @@ class BasicHttpManager {
     _dio?.interceptors.addAll(managerConfig.interceptors);
   }
 
+  /// 设置请求头
+  void setHeaders(Map<String, dynamic> headers) {
+    managerConfig = managerConfig.copyWith(httpHeader: headers);
+  }
+
   ///
   /// 通用的GET请求
   /// silent: 静默请求，请求失败时不弹出任何提示
@@ -56,7 +61,7 @@ class BasicHttpManager {
   }) async {
     assert(_isInitialized, 'BasicHttpManager has not been initialized');
 
-    _dio?.options.headers = managerConfig.httpHeaderGetter?.call();
+    _dio?.options.headers = managerConfig.httpHeader;
     return await _dio?.get(api, queryParameters: params);
   }
 
@@ -67,7 +72,7 @@ class BasicHttpManager {
     bool? silent,
   }) async {
     assert(_isInitialized, 'BasicHttpManager has not been initialized');
-    _dio?.options.headers = managerConfig.httpHeaderGetter?.call();
+    _dio?.options.headers = managerConfig.httpHeader;
     return await _dio?.post(api, data: params);
   }
 
@@ -79,7 +84,7 @@ class BasicHttpManager {
   }) async {
     assert(_isInitialized, 'BasicHttpManager has not been initialized');
 
-    _dio?.options.headers = managerConfig.httpHeaderGetter?.call();
+    _dio?.options.headers = managerConfig.httpHeader;
     return await _dio?.put(api, data: params);
   }
 
@@ -90,7 +95,7 @@ class BasicHttpManager {
     bool? silent,
   }) async {
     assert(_isInitialized, 'BasicHttpManager has not been initialized');
-    _dio?.options.headers = managerConfig.httpHeaderGetter?.call();
+    _dio?.options.headers = managerConfig.httpHeader;
     return _dio?.delete<dynamic>(api, data: params);
   }
 }

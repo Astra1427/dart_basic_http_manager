@@ -6,7 +6,7 @@ class HttpManagerConfig {
   const HttpManagerConfig({
     required this.baseUrl,
     this.interceptors = const [],
-    this.httpHeaderGetter,
+    this.httpHeader = const {},
     this.onStatusCode,
     this.businessErrorCode,
     this.businessErrorMsg,
@@ -20,7 +20,7 @@ class HttpManagerConfig {
   final List<Interceptor> interceptors;
 
   /// http header
-  final Map<String, dynamic> Function()? httpHeaderGetter;
+  final Map<String, dynamic> httpHeader;
 
   /// 当一次请求完毕，将状态码回调出去，提供外部判断
   final bool Function({required int code, String? errorMsg, bool? silent})?
@@ -39,7 +39,7 @@ class HttpManagerConfig {
   HttpManagerConfig copyWith({
     String? baseUrl,
     List<Interceptor>? interceptors,
-    Map<String, dynamic> Function()? httpHeaderGetter,
+    Map<String, dynamic>? httpHeader,
     bool Function({required int code, String? errorMsg, bool? silent})?
         onStatusCode,
     String? businessErrorCode,
@@ -49,7 +49,7 @@ class HttpManagerConfig {
     return HttpManagerConfig(
       baseUrl: baseUrl ?? this.baseUrl,
       interceptors: interceptors ?? this.interceptors,
-      httpHeaderGetter: httpHeaderGetter ?? this.httpHeaderGetter,
+      httpHeader: httpHeader ?? this.httpHeader,
       onStatusCode: onStatusCode ?? this.onStatusCode,
       businessErrorCode: businessErrorCode ?? this.businessErrorCode,
       businessErrorMsg: businessErrorMsg ?? this.businessErrorMsg,
