@@ -58,11 +58,12 @@ class BasicHttpManager {
     Map<String, dynamic>? params,
     bool? silent,
     bool needToken = true,
+    Object? data,
   }) async {
     assert(_isInitialized, 'BasicHttpManager has not been initialized');
 
     _dio?.options.headers = managerConfig.httpHeader;
-    return await _dio?.get(api, queryParameters: params);
+    return await _dio?.get(api, queryParameters: params, data: data);
   }
 
   /// 通用的POST请求
